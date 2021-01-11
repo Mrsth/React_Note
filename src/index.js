@@ -1,13 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+
+import Sales from './Components/Sales';
+import Purchase from './Components/Purchase';
+import NavBar from './Components/NavBar';
+import BalanceSheet from './Components/BalanceSheet';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <BrowserRouter>
+    <NavBar/>
+      <Switch>
+        <Route path="/Sales" component={Sales}/>
+        <Route path="/Purchase" component={Purchase}/>
+        <Route path="/bs" component={BalanceSheet}/>
+      </Switch>  
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
