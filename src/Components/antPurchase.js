@@ -69,6 +69,15 @@ class antPurchase extends React.Component {
       required: "${label} is required!",
       types: {
         number: "${label} is not a valid number!",
+        regex: "[A-Za-z]",
+      },
+    };
+    const layout = {
+      labelCol: {
+        span: 10,
+      },
+      wrapperCol: {
+        span: 16,
       },
     };
     return (
@@ -78,6 +87,7 @@ class antPurchase extends React.Component {
       >
         <h4 className="text-center">Enter Your Purchase</h4>
         <Form
+          {...layout}
           className="container my-5 "
           name="nest-messages"
           validateMessages={validateMessages}
@@ -90,12 +100,11 @@ class antPurchase extends React.Component {
             rules={[
               {
                 required: true,
-                pattern: "[A-Z,a-z]",
+                pattern: "[^0-9+]",
               },
             ]}
           >
             <Input
-              className="ml-4"
               style={{ width: "150px" }}
               name="purchase_item"
               value={this.state.purchase_item}
@@ -115,7 +124,6 @@ class antPurchase extends React.Component {
             ]}
           >
             <InputNumber
-              className="ml-1"
               style={{ width: "150px" }}
               name="purchase_amount"
               rules={[
@@ -138,16 +146,18 @@ class antPurchase extends React.Component {
             ]}
           >
             <DatePicker
-              style={{ width: "150px", marginLeft: "84px" }}
+              style={{ width: "150px" }}
               name="purchase_date"
               dateFormat="MM/dd/yyyy"
               onChange={this.myDateHandler}
             />
           </Form.Item>
 
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
+          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 10 }}>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
         </Form>
       </div>
     );
