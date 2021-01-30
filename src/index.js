@@ -1,39 +1,49 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import Sales from './Components/Sales';
-import Purchase from './Components/Purchase';
-import NavBar from './Components/NavBar';
-import BalanceSheet from './Components/BalanceSheet';
+import Home from "./Components/home";
+import Sales from "./Components/Sales";
+import Purchase from "./Components/Purchase";
+import NavBar from "./Components/NavBar";
+import BalanceSheet from "./Components/BalanceSheet";
+import Antfooter from "./Components/antfooter";
 
-import Set_state from './Components/Set_state';
-import Data_fetch_file from './Components/Data_fetch_file';
+import Set_state from "./Components/Set_state";
+import Data_fetch_file from "./Components/Data_fetch_file";
 
-import New_sale_purchase from './Component/New_sale_purchase';
+import New_sale_purchase from "./Component/New_sale_purchase";
 
-
+import FormSizeDemo from "./Components/antform";
+import AntNav from "./Components/antnav";
+import AntSales from "./Components/antSales";
+import AntPurchase from "./Components/antPurchase";
 
 ReactDOM.render(
   <div>
     <BrowserRouter>
-      <NavBar />
-        <Switch>
+      <AntNav />
+      <Switch>
+        <Route path="/new_sales_purchase" component={New_sale_purchase} />
 
-          <Route path="/new_sales_purchase" component={New_sale_purchase}/>
+        <Route path="/use" component={Set_state} />
+        <Route path="/dff" component={Data_fetch_file} />
+        <Route path="/Sales" component={Sales} />
+        <Route path="/Purchase" component={Purchase} />
+        <Route path="/Demo" component={FormSizeDemo} />
 
+        <Route path="/antsales" component={AntSales} />
+        <Route path="/antpurchase" component={AntPurchase} />
+        <Route path="/bs" component={() => <BalanceSheet text="apple" />} />
+        <Route path="/" component={Home} />
 
-          <Route path="/use" component={Set_state}/>
-          <Route path="/dff" component={Data_fetch_file}/>
-          <Route path="/Sales" component={Sales} />
-          <Route path="/Purchase" component={Purchase} />
-          <Route path="/bs" component={() => <BalanceSheet text="apple" />} />
-          {/* <Route path="/bs" component={BalanceSheet}/> */}
-        </Switch>   
+        {/* <Route path="/bs" component={BalanceSheet}/> */}
+      </Switch>
     </BrowserRouter>
-  </div> ,
-  document.getElementById('root')
+    <Antfooter />
+  </div>,
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
