@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Input, InputNumber, Button, DatePicker } from "antd";
 import "antd/dist/antd.css";
+import moment from "moment";
 
 class antSales extends React.Component {
   state = {
@@ -14,7 +15,7 @@ class antSales extends React.Component {
 
   //TO GET THE DATA DYNAMICALLY FROM THE INPUT FIELD
   mySalseHandler = (event) => {
-    console.log(event);
+    console.log(event.target.value);
     this.setState({
       [event.target.name]: event.target.value,
     });
@@ -22,7 +23,7 @@ class antSales extends React.Component {
   myDateHandler = (date) => {
     console.log(date);
     console.log(date?._d);
-    const d = date.format("YYYY-MM-DD");
+    const d = date?.format("YYYY-MM-DD");
     console.log(d);
     this.state.sales_date = d;
     // this.setState({
@@ -69,7 +70,6 @@ class antSales extends React.Component {
       required: "${label} is required!",
       types: {
         number: "${label} is not a valid number!",
-        regexp: "no",
       },
     };
     const layout = {
@@ -80,6 +80,10 @@ class antSales extends React.Component {
         span: 16,
       },
     };
+    function disabledDate(current) {
+      // Can not select days before today and today
+      return current && current > moment().endOf("day");
+    }
 
     return (
       <div
@@ -101,15 +105,17 @@ class antSales extends React.Component {
           <Form.Item
             name={["Item"]}
             label="Sales Item"
+            //help="Item should be in characters"
             rules={[
               {
                 required: true,
-                pattern: "[A-Za-z]",
+                pattern: "^[a-zA-Z]+$",
+                message: "Sales Item should be in characters only",
               },
             ]}
           >
             <Input
-              style={{ width: "180px" }}
+              style={{ width: "150px" }}
               name="sales_item"
               value={this.state.sales_item}
               onChange={this.mySalseHandler}
@@ -124,17 +130,14 @@ class antSales extends React.Component {
               {
                 required: true,
                 type: "number",
+                message: "Sales Amount should be in numbers",
               },
             ]}
           >
-            <InputNumber
+            <Input
               style={{ width: "150px" }}
               name="sales_amount"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
+
               // value={this.state.sales_amount}
               // onChange={this.mySalseHandler}
             />
@@ -153,6 +156,7 @@ class antSales extends React.Component {
               style={{ width: "150px" }}
               name="sales_date"
               dateFormat="MM/dd/yyyy"
+              disabledDate={disabledDate}
               onChange={this.myDateHandler}
             />
           </Form.Item>

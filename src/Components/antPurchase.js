@@ -22,7 +22,7 @@ class antPurchase extends React.Component {
   myDateHandler = (date) => {
     console.log(date);
     console.log(date?._d);
-    const d = date.format("YYYY-MM-DD");
+    const d = date?.format("YYYY-MM-DD");
     console.log(d);
     this.state.purchase_date = d;
     // this.setState({
@@ -100,7 +100,8 @@ class antPurchase extends React.Component {
             rules={[
               {
                 required: true,
-                pattern: "[^0-9+]",
+                pattern: "^[a-zA-Z]+$",
+                message: "Purchase Item should be in characters",
               },
             ]}
           >
@@ -119,18 +120,15 @@ class antPurchase extends React.Component {
             rules={[
               {
                 required: true,
-                type: "number",
+                pattern: "^[0-9]+$",
+                message: "Purchase Amount shoud be in numbers only",
               },
             ]}
           >
-            <InputNumber
+            <Input
               style={{ width: "150px" }}
               name="purchase_amount"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
+
               // value={this.state.sales_amount}
               // onChange={this.mySalseHandler}
             />
