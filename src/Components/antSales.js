@@ -89,7 +89,8 @@ class antSales extends React.Component {
       <div
         className="container p-5"
         style={{
-          height: "535px",
+          height:'75vh',
+          maxHeight: "100vh",
           marginTop: "70px",
         }}
       >
@@ -129,7 +130,7 @@ class antSales extends React.Component {
             rules={[
               {
                 required: true,
-                type: "number",
+                pattern:"^[0-9]+$",
                 message: "Sales Amount should be in numbers",
               },
             ]}

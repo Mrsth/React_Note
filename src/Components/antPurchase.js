@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Input, InputNumber, Button, DatePicker } from "antd";
 import "antd/dist/antd.css";
+import moment from "moment";
 
 class antPurchase extends React.Component {
   state = {
@@ -64,7 +65,12 @@ class antPurchase extends React.Component {
       });
   };
 
+
   render() {
+    function disabledDate(current) {
+      // Can not select days before today and today
+      return current && current > moment().endOf("day");
+    }
     const validateMessages = {
       required: "${label} is required!",
       types: {
@@ -83,7 +89,8 @@ class antPurchase extends React.Component {
     return (
       <div
         className="container p-5"
-        style={{ height: "535px", marginTop: "70px" }}
+        style={{marginTop: "70px", height:'75vh',
+        maxHeight: "100vh", }}
       >
         <h4 className="text-center">Enter Your Purchase</h4>
         <Form
@@ -147,6 +154,7 @@ class antPurchase extends React.Component {
               style={{ width: "150px" }}
               name="purchase_date"
               dateFormat="MM/dd/yyyy"
+              disabledDate={disabledDate}
               onChange={this.myDateHandler}
             />
           </Form.Item>

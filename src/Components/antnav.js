@@ -20,8 +20,8 @@ const Antnav = () => {
             <Menu.Item key="/antpurchase" style={{ float: "right" }}>
               <Link to="/antpurchase">Purchase</Link>
             </Menu.Item>
-            <Menu.Item key="/bs" style={{ float: "right" }}>
-              <Link to="/bs">BalanceSheet</Link>
+            <Menu.Item key="/dff" style={{ float: "right" }}>
+              <Link to="/dff">BalanceSheet</Link>
             </Menu.Item>
           </Menu>
         </Header>

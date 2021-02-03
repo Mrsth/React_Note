@@ -1,125 +1,129 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import '../CSS/BalanceSheet.css'
 
-function New_balance(props){
-    console.log("Passed props = ",props)
-    console.log("Passed sales props = ",props.data)
-    console.log("Passed purchase props = ",props.pdata)
+function New_balance(){
+    //USING A HOOK
+    const [fetchData, setFetchData] = useState([]);
+
+    useEffect(()=>{
+             fetch('http://127.0.0.1:8000/sale/')
+                .then(response=> response.json())
+                .then(data=>setFetchData(data))
+    },[])
+
+    const [pfetchData, psetFetchData] = useState([]);
+
+    useEffect(()=>{
+              fetch('http://127.0.0.1:8000/pur/')
+                .then(response=> response.json())
+                .then(data=>psetFetchData(data))
+    },[])
+
+   
+
     
-    let sales_total = 0;
-    props.data.map((sdata)=>{
-       return sales_total += sdata.salesAmount
-    })
-    console.log("Sales total = ", sales_total)
+    // let sales_total = 0;
+    // props.data.map((sdata)=>{
+    //    return sales_total += sdata.salesAmount
+    // })
 
-    let purchase_total = 0;
-    props.pdata.map((pur_data)=>{
-        return purchase_total += pur_data.purchaseAmount
-    })
-    console.log("Purchase total = ", purchase_total)
+    // let purchase_total = 0;
+    // fetchData.map((pur_data)=>{
+    //     return purchase_total += pur_data.purchaseAmount
+    // })
 
+    let total = 0
+    console.log("lol = ",fetchData)
+    {fetchData.map((list)=>{
+        total += list.salesAmount
+        })}
+    console.log("Sale total = ", total)    
+
+    let ptotal = 0
+    console.log("plol = ",pfetchData)
+    {pfetchData.map((list)=>{
+        ptotal += list.purchaseAmount
+        })}  
+    console.log("Purchase total = ", ptotal)      
+  
     // let total = 0;
-    // props.data.map((item)=>{
-    //     return total += item.sales_amount   
+    // fetchData.data.map((item)=>{
+    //     return total += item.salesAmount   
     // })
     // console.log("New API sales total = ", total)
 
     // let ptotal = 0;
-    // props.pdata.map((item)=>{
-    //     return ptotal += item.purchase_amount
+    // pfetchData.pdata.map((item)=>{
+    //     return ptotal += item.purchaseAmount
     // })
     // console.log("New API purchase total = ", ptotal)
 
 
     let message = "";
-    if(sales_total>purchase_total){
+    if(total>ptotal){
         message = "Profit";
-    }else if(sales_total<purchase_total){
+    }else if(total<ptotal){
         message = "Loss";
     }else{
         message="Equal";
     }
 
     return(
-        <div>
-            {/* <div id="Balance_sheet">            
-                <h1 id="total_sales">Total sales = {sales_total}</h1> 
+        <>
+        <h1 style={{textAlign: "center"}}>{message}</h1>
+        <div className="row container-fluid">
+            <div className="col-sm">
+                <h1 style={{textAlign: "center"}}>Sales Table:{total}</h1>
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>salesItem</th>
+                            <th>salesAmount</th>
+                            <th>salesDate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {fetchData.map((list)=>{
+                    return(
+                        <tr key={list.id}>
+                            <td>{list.id}</td>
+                            <td>{list.salesItem}</td>
+                            <td>{list.salesAmount}</td>
+                            <td>{list.salesDate}</td>
+                        </tr>
+                    )
+                    })}
+                    </tbody>
+                </table>
             </div>
-            <div><h1 id="total_purchase">Total purchase = {purchase_total}</h1></div>
-            <div> <h1 id="result">{message}</h1> </div> */}
-
-            <div className="row">
-                <div className="col-sm"><h1 id="total_sales">Total sales = {sales_total}</h1></div>
-                <div className="col-sm"><h1 id="result">{message}</h1> </div>
-                <div className="col-sm"><h1 id="total_purchase">Total purchase = {purchase_total}</h1></div>
+            <div className="col-sm">
+             <h1 style={{textAlign: "center"}}>Purchase Table:{ptotal}</h1>
+            <table className="table">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>purchaseItem</th>
+                            <th>purchaseAmount</th>
+                            <th>purchaseDate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {pfetchData.map((list)=>{
+                    return(
+                        <tr key={list.id}>
+                            <td>{list.id}</td>
+                            <td>{list.purchaseItem}</td>
+                            <td>{list.purchaseAmount}</td>
+                            <td>{list.purchaseDate}</td>
+                        </tr>
+                    )
+                    })}
+                    </tbody>
+                </table>
             </div>
-
-            <div className="row">
-                <div className="col-sm">
-                {/* //################################# SALES TABLE STARTS HERE #######################################################    */}
-                    <div>
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                    <th>Sales ID</th>
-                                    <th>Sales Items</th>
-                                    <th>Sales Amount</th>
-                                    <th>Sales Date</th>
-                                </tr>
-                            </thead>
-                        
-                        {props.data.map((sitem)=>{
-                            {console.log(sitem)}
-                        return( 
-                                <tbody key={sitem.id}>
-                                    <tr>
-                                        <td>{sitem.id}</td>
-                                        <td>{sitem.salesItem}</td>
-                                        <td>{sitem.salesAmount}</td>
-                                        <td>{sitem.salesDate}</td>
-                                    </tr>
-                                </tbody>
-                            
-                        )
-                        })}
-                        </table>
-                    </div>  
-            {/* //#################################### SALES TABLE ENDS HERE #######################################################   */}
-                </div>
-                <div className="col-sm">
-                {/* //#################################### PURCHASE TABLE ENDS HERE #######################################################   */}
-                <div>
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                    <th>Purchase ID</th>
-                                    <th>Purchase Items</th>
-                                    <th>Purchase Amount</th>
-                                    <th>Purchase Date</th>
-                                </tr>
-                            </thead>
-                        
-                        {props.pdata.map((pitem)=>{
-                            {console.log(pitem)}
-                        return( 
-                                <tbody key={pitem.id}>
-                                    <tr>
-                                        <td>{pitem.id}</td>
-                                        <td>{pitem.purchaseItem}</td>
-                                        <td>{pitem.purchaseAmount}</td>
-                                        <td>{pitem.purchaseDate}</td>
-                                    </tr>
-                                </tbody>
-                            
-                        )
-                        })}
-                        </table>
-                    </div>  
-                
-                {/* //#################################### PURCHASE TABLE ENDS HERE #######################################################  */}
-                </div>
-            </div>    
         </div>
+        </>
     );
 }
 

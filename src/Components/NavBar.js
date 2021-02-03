@@ -16,7 +16,7 @@ function NavBar() {
                 <Nav>
                     <Link style={heading} to="/Sales">Sales</Link>
                     <Link style={heading} to="/Purchase">Purchase</Link>
-                    <Link style={heading} to="/new_sales_purchase">Balance Sheet</Link>
+                    <Link style={heading} to="/dff">Balance Sheet</Link>
                     {/* <Nav.Link href="/Sales">Sales</Nav.Link>
                     <Nav.Link href="/Purchase">Purchase</Nav.Link>
                     <Nav.Link href="/bs">Balance Sheet</Nav.Link> */}

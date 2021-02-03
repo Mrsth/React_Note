@@ -67,9 +67,9 @@ class Sales extends React.Component {
     };
 
     return (
-      <div id="sales_div" style={{ height: "72vh" }}>
+      <div id="sales_div" style={{ height: "120vh", maxHeight:"90vh" }}>
         {/* {this.state.alert && alert(this.state.alert)} */}
-        <h1 id="Sales_heading">Please Enter Your Sale</h1>
+        <h1 id="Sales_heading">Please Enter Your Sales</h1>
         <form
           onSubmit={(e) => this.handleSubmit(e)}
           id="Sales_form"
