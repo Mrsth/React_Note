@@ -1,0 +1,11 @@
+.sales .title{
+    background-color: #36A2EB;
+  }
+  .title p{
+    color: white;
+    padding: 0.75rem;
+  }
+.sales button{
+    background-color: #36A2EB !important;
+    color: white !important;
+}

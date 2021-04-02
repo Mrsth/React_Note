@@ -1,0 +1,23 @@
+#Balance_sheet{
+    background-color: aquamarine;
+}
+
+#total_sales{
+    text-align: center;
+    margin-left: 30%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+#total_purchase{
+    text-align:center;
+    margin-right: 15%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+#result{
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}

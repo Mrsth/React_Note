@@ -1,0 +1,11 @@
+.title{
+    background-color: #FF6384;
+  }
+  .title p{
+    color: white;
+    padding: 0.75rem;
+  }
+button{
+    background-color: #FF6384 !important;
+    color: white !important;
+}
